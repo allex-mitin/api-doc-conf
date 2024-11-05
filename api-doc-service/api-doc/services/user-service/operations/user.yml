@@ -1,0 +1,28 @@
+post:
+  tags:
+    - user
+  summary: Create user
+  description: This can only be done by the logged in user.
+  operationId: createUser
+  requestBody:
+    description: Created user object
+    content:
+      application/json:
+        schema:
+          $ref: '../components/schemas/request.yml#/User'
+      application/xml:
+        schema:
+          $ref: '../components/schemas/request.yml#/User'
+      application/x-www-form-urlencoded:
+        schema:
+          $ref: '../components/schemas/request.yml#/User'
+  responses:
+    default:
+      description: successful operation
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/response.yml#/User'
+        application/xml:
+          schema:
+            $ref: '../components/schemas/response.yml#/User'

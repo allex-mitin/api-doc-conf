@@ -1,0 +1,42 @@
+{
+  "name": "api-doc-ui",
+  "description": "Web UI to load OpenApi and AsyncApi API specs",
+  "author": "Mitin Aleksandr",
+  "readmeFilename": "README.md",
+  "private": false,
+  "license": "Apache-2.0",
+  "scripts": {
+    "lint": "eslint --ext .js,.ts,.tsx src",
+    "lint:fix": "npm run lint -- --fix",
+    "start": "vite serve --host=0.0.0.0",
+    "types": "tsc",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "@admiral-ds/fonts": "2.0.0",
+    "@admiral-ds/icons": "4.3.1",
+    "@admiral-ds/react-ui": "8.25.3",
+    "@asyncapi/react-component": "1.4.5",
+    "@vitejs/plugin-react": "^4.2.1",
+    "classnames": "^2.5.1",
+    "compare-versions": "^6.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-headroom": "^3.2.1",
+    "react-router-dom": "^6.22.2",
+    "swagger-ui": "^5.11.8",
+    "swagger-ui-react": "^5.11.8",
+    "vite": "^5.1.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.24",
+    "@types/react": "^18.2.61",
+    "@types/react-dom": "^18.2.19",
+    "@types/react-headroom": "^3.2.3",
+    "@types/swagger-ui-react": "^4.18.3",
+    "autoprefixer": "^10.4.18",
+    "eslint": "^8.57.0",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.3.3"
+  }
+}

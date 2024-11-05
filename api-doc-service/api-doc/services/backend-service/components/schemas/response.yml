@@ -1,0 +1,2 @@
+InfoResponse:
+  $ref: '../response/InfoResponse.yml#/InfoResponse'

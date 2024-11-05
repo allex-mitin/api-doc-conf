@@ -1,0 +1,48 @@
+openapi: 3.0.3
+info:
+  title: Swagger Petstore Pet service - OpenAPI 3.0
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+  - url: https://petstore3.swagger.io/api/v3
+tags:
+  - name: pet
+    description: Everything about your Pets
+    externalDocs:
+      description: Find out more
+      url: http://swagger.io
+paths:
+  /pet:
+    $ref: './operations/pet.yml'
+  /pet/findByStatus:
+    $ref: './operations/pet-findByStatus.yml'
+  /pet/findByTags:
+    $ref: './operations/pet-findByTags.yml'
+  /pet/{petId}:
+    $ref: './operations/petId.yml'
+  /pet/{petId}/uploadImage:
+    $ref: './operations/petId-uploadImage.yml'
+
+
+components:
+  securitySchemes:
+    petstore_auth:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://petstore3.swagger.io/oauth/authorize
+          scopes:
+            write:pets: modify pets in your account
+            read:pets: read your pets
+    api_key:
+      type: apiKey
+      name: api_key
+      in: header

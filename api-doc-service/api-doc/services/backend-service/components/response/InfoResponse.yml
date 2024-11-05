@@ -1,0 +1,10 @@
+InfoResponse:
+  type: object
+  properties:
+    requestId:
+      type: string
+      format: uuid
+    pet:
+      $ref: '../model/Pet.yml#/components/schemas/Pet'
+    user:
+      $ref: '../model/User.yml#/components/schemas/User'

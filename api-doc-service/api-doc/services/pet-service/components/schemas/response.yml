@@ -1,0 +1,4 @@
+Pet:
+  $ref: '../response/PetResponse.yml#/PetResponse'
+ApiResponse:
+  $ref: '../response/ApiResponse.yml#/ApiResponse'

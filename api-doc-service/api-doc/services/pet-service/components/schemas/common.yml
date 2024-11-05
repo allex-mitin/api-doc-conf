@@ -1,0 +1,2 @@
+Pet:
+  $ref: '../../../../common/components/schemas/Pet.yml#/Pet'

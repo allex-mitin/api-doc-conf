@@ -1,0 +1,13 @@
+version: "3.0"
+
+services:
+  swagger-ui:
+    container_name: swagger-simple-service
+    build:
+      context: .
+    volumes:
+      - ./api-doc:/usr/share/nginx/html/api-doc:rw
+      - ./swagger-initializer.js:/usr/share/nginx/html/swagger-initializer.js
+    restart: always
+    ports:
+      - "8091:8090"

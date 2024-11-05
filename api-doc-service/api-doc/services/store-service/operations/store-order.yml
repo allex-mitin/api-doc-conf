@@ -1,0 +1,28 @@
+post:
+  tags:
+    - store
+  summary: Place an order for a pet
+  description: Place a new order in the store
+  operationId: placeOrder
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../components/schemas/request.yml#/Order'
+      application/xml:
+        schema:
+          $ref: '../components/schemas/request.yml#/Order'
+      application/x-www-form-urlencoded:
+        schema:
+          $ref: '../components/schemas/request.yml#/Order'
+  responses:
+    '200':
+      description: successful operation
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/response.yml#/Order'
+    '400':
+      description: Invalid input
+    '422':
+      description: Validation exception

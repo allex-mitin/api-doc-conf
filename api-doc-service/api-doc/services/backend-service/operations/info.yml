@@ -1,0 +1,37 @@
+get:
+  tags:
+    - info
+  summary: Get info about pet and user
+  description: Get info about pet and user
+  operationId: getInfo
+  parameters:
+    - name: petId
+      in: path
+      description: ID of pet to return
+      required: true
+      schema:
+        type: integer
+        format: int64
+    - name: username
+      in: query
+      description: 'The name that needs to be fetched. Use user1 for testing. '
+      required: true
+      schema:
+        type: string
+        example: user
+  responses:
+    '200':
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/response.yml#/InfoResponse'
+        application/xml:
+          schema:
+            $ref: '../components/schemas/response.yml#/InfoResponse'
+    '400':
+      description: Input error
+    '500':
+      description: Server error
+  security:
+

@@ -1,0 +1,2 @@
+OrderRequest:
+  $ref: '../model/Order.yml#/components/schemas/Order'

@@ -1,0 +1,13 @@
+version: "3.0"
+
+services:
+  swagger-ui:
+    container_name: api-doc-service
+    build:
+      context: .
+    volumes:
+      - ./api-doc:/usr/share/nginx/html/api-doc:rw
+      - ./settings.js:/usr/share/nginx/html/settings.js
+    restart: always
+    ports:
+      - "8093:8090"

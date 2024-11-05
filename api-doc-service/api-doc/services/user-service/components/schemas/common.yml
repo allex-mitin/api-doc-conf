@@ -1,0 +1,2 @@
+User:
+  $ref: '../../../../common/components/schemas/User.yml#/User'

@@ -1,0 +1,4 @@
+Pet:
+  $ref: '../../../../common/components/schemas/Pet.yml#/Pet'
+User:
+  $ref: '../../../../common/components/schemas/User.yml#/User'

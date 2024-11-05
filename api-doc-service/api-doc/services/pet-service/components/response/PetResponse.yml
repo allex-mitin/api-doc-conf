@@ -1,0 +1,2 @@
+PetResponse:
+  $ref: '../model/Pet.yml#/components/schemas/Pet'

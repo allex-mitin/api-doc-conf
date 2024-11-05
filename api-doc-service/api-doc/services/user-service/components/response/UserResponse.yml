@@ -1,0 +1,2 @@
+UserResponse:
+  $ref: '../model/User.yml#/components/schemas/User'
