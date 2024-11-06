@@ -1,5 +1,5 @@
 import React, { FC, forwardRef, ReactNode, useMemo, useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
     MenuItem,
     RenderOptionProps, TabIcon,
@@ -96,15 +96,14 @@ const NavigatorWrapper = styled.div`
 
 export const Navigator: FC = () => {
     const navigate = useNavigate();
+    const path = useParams()
 
     const tabsMap = useMemo(() => {
         return tabs.map((tab) => tab.tabId);
     }, [tabs]);
 
-    const [selectedTab, setSelectedTab] = useState<string | undefined>('/');
     const handleSelectTab = (tabId: string) => {
         const currentTab = services.find((tab) => tab.path === tabId);
-        setSelectedTab(tabId)
         navigate(`/service/${ currentTab.path }`)
     };
 
@@ -143,7 +142,7 @@ export const Navigator: FC = () => {
     return (
         <NavigatorWrapper>
             <TabMenuVertical
-                selectedTabId={ selectedTab }
+                selectedTabId={ path.serviceName ?? '/' }
                 onSelectTab={ handleSelectTab }
                 tabsId={ tabsMap }
                 renderTab={ renderTab }

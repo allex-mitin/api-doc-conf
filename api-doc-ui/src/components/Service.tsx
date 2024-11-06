@@ -16,7 +16,6 @@ export const Service: FC = () => {
 
     return (
         <ServiceWrapper>
-            <Menu/>
             <Outlet/>
         </ServiceWrapper>
     )

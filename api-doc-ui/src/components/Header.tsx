@@ -3,10 +3,11 @@ import { Logo } from './Logo';
 import { T } from '@admiral-ds/react-ui';
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import { Menu } from "./Menu";
 
 const HeaderWrapper = styled.div`
     display: flex;
-    height: 100px;
+    height: 70px;
     align-items: center;
     padding-left: 20px;
     gap: 20px;
@@ -22,6 +23,7 @@ export const Header: FC = () => {
             <T font='Header/H6'>
                 ApiDoc - System api documentation
             </T>
+            <Menu/>
         </HeaderWrapper>
     );
 };
