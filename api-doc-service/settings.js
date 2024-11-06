@@ -5,31 +5,31 @@ function settings() {
                 "path": "backend-apifirst",
                 "name": "Backend API First Service",
                 "openapi": {
-                    "url": "./api-doc/services/backend-service/openapi.yml"
+                    "url": "/api-doc/services/backend-service/openapi.yml"
                 },
                 "asyncapi": {
-                    "url": "./api-doc/service/backend-service/asyncapi.yml"
+                    "url": "/api-doc/services/backend-service/asyncapi.yml"
                 }
             },
             {
                 "path": "pet-service",
                 "name": "Pet service",
                 "openapi": {
-                    "url": "./api-doc/service/pet-service/openapi.yml"
+                    "url": "/api-doc/services/pet-service/openapi.yml"
                 }
             },
             {
                 "path": "store-service",
                 "name": "Store service",
                 "openapi": {
-                    "url": "./api-doc/services/store-service/openapi.yml"
+                    "url": "/api-doc/services/store-service/openapi.yml"
                 }
             },
             {
                 "path": "user-service",
                 "name": "User service",
                 "openapi": {
-                    "url": "./api-doc/services/user-service/openapi.yml"
+                    "url": "/api-doc/services/user-service/openapi.yml"
                 }
             }
         ]
