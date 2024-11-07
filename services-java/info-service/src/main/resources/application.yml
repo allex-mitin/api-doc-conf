@@ -1,10 +1,14 @@
 spring:
   application:
-    name: backend-apifirst
+    name: info-service
   kafka:
     bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring.json.add.type.headers: true
 
 
 rest-client:
-  pet-url: ${PET_SERVICE_URL:'http://localhost:8080'}
-  user-url: ${USER_SERVICE_URL:'http://localhost:8080'}
+  pet-url: ${PET_SERVICE_URL:http://localhost:8182}
+  user-url: ${USER_SERVICE_URL:http://localhost:8183}

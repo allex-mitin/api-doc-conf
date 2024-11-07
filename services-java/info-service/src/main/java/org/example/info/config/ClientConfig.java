@@ -1,4 +1,4 @@
-package org.example.backend.apifirst.config;
+package org.example.info.config;
 
 import org.example.info.client.pet.client.PetApi;
 import org.example.info.client.user.client.UserApi;
@@ -28,11 +28,8 @@ public class ClientConfig {
             RestTemplateBuilder restTemplateBuilder,
             @Value("${rest-client.pet-url}") String url
     ) {
-        return new org.example.info.client.pet.ApiClient(
-                restTemplateBuilder
-                        .uriTemplateHandler(new DefaultUriBuilderFactory(url))
-                        .build()
-        );
+        return new org.example.info.client.pet.ApiClient(restTemplateBuilder.build())
+                .setBasePath(url);
     }
 
     @Bean
@@ -45,11 +42,8 @@ public class ClientConfig {
             RestTemplateBuilder restTemplateBuilder,
             @Value("${rest-client.user-url}") String url
     ) {
-        return new org.example.info.client.user.ApiClient(
-                restTemplateBuilder
-                        .uriTemplateHandler(new DefaultUriBuilderFactory(url))
-                        .build()
-        );
+        return new org.example.info.client.user.ApiClient(restTemplateBuilder.build())
+                .setBasePath(url);
     }
 
 

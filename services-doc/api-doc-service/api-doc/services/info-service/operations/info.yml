@@ -6,7 +6,7 @@ get:
   operationId: getInfo
   parameters:
     - name: petId
-      in: path
+      in: query
       description: ID of pet to return
       required: true
       schema:

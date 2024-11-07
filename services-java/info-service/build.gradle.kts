@@ -141,7 +141,6 @@ fun generateServerFromOpenapi(name: String, swaggerPath: String, pkg: String) {
                 "requestMappingMode" to "api_interface",
                 "useBeanValidation" to "true",
                 "useJakartaEe" to "true",
-                "useResponseEntity" to "false",
                 "useSpringBoot3" to "true",
                 "useSwaggerUI" to "false",
                 "useTags" to "true",

@@ -1,4 +1,4 @@
-package org.example.backend.apifirst.mapper;
+package org.example.info.mapper;
 
 import org.example.info.asyncapi.SavePetMessage;
 import org.example.info.client.pet.dto.Pet;

@@ -1,4 +1,4 @@
-package org.example.backend.apifirst;
+package org.example.info;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

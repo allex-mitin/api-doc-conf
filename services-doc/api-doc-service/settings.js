@@ -2,8 +2,8 @@ function settings() {
     return {
         "services": [
             {
-                "path": "backend-apifirst",
-                "name": "Backend API First Service",
+                "path": "info-service",
+                "name": "Info service",
                 "openapi": {
                     "url": "/api-doc/services/info-service/openapi.yml"
                 },

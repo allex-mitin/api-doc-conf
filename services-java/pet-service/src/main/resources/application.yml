@@ -1,3 +1,7 @@
 spring:
   application:
     name: pet-service
+
+openapi:
+  swaggerPetstorePetServiceOpenAPI30:
+    base-path: /

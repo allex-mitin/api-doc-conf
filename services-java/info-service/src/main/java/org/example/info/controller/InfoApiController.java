@@ -1,10 +1,9 @@
-package org.example.backend.apifirst.controller;
+package org.example.info.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.example.backend.apifirst.mapper.DtoMapper;
+import org.example.info.mapper.DtoMapper;
 import org.example.info.client.pet.client.PetApi;
 import org.example.info.client.user.client.UserApi;
-import org.example.info.controller.InfoApi;
 import org.example.info.controller.dto.InfoResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.core.KafkaTemplate;

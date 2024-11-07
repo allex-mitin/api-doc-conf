@@ -17,7 +17,7 @@ throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public ResponseEntity<User> createUsersWithListInput(List<@Valid User> user) {
+    public ResponseEntity<User> createUsersWithListInput(@Valid List<@Valid User> user) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

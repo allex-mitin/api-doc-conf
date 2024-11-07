@@ -1,5 +1,6 @@
-version: "3.0"
+version: "3.8"
 
+name: api-doc-conf
 services:
   swagger-ui:
     container_name: api-doc-service
@@ -8,6 +9,10 @@ services:
     volumes:
       - ./api-doc:/usr/share/nginx/html/api-doc:rw
       - ./settings.js:/usr/share/nginx/html/settings.js
-    restart: always
     ports:
       - "8093:8090"
+    networks:
+      - api-doc-conf
+
+networks:
+  api-doc-conf:
