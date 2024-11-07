@@ -5,6 +5,7 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 node_modules/
+.nodejs/**
 
 ### IntelliJ IDEA ###
 .idea/**

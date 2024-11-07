@@ -1,6 +1,9 @@
 spring:
   application:
     name: backend-apifirst
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+
 
 rest-client:
   pet-url: ${PET_SERVICE_URL:'http://localhost:8080'}

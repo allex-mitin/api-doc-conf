@@ -1,0 +1,5 @@
+SavePetMessage:
+  type: object
+  $id: 'SavePetMessage'
+  allOf:
+    - $ref: '../message/SavePetMessage.yml#/SavePetMessage'

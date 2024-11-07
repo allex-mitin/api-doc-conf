@@ -1,21 +1,24 @@
+import com.github.gradle.node.npm.task.NpxTask
 import org.openapitools.generator.gradle.plugin.tasks.GenerateTask
 
-buildscript {
-    dependencies {
-        classpath("com.github.node-gradle:gradle-node-plugin:7.0.2")
-        classpath("org.openapitools:openapi-generator-gradle-plugin:7.6.0")
-    }
-}
-
-apply(plugin = "com.github.node-gradle.node")
-apply(plugin = "org.openapi.generator")
+//buildscript {
+//    dependencies {
+//        classpath("com.github.node-gradle:gradle-node-plugin:7.0.2")
+//        classpath("org.openapitools:openapi-generator-gradle-plugin:7.6.0")
+//    }
+//}
+//
+//apply(plugin = "com.github.node-gradle.node")
+//apply(plugin = "org.openapi.generator")
 
 
 plugins {
     id("java")
     id("org.springframework.boot") version "3.3.2"
-//    id("org.openapi.generator") version "7.6.0"
-//    id("com.github.node-gradle.node") version "7.0.2"
+    id("org.openapi.generator") version "7.6.0"
+    id("com.github.node-gradle.node") version "7.0.2"
+//    id("com.sngular.scs-multiapi-gradle-plugin") version "6.0.4"
+//    id("org.jsonschema2pojo") version "1.2.2"
 }
 
 version = "1.0.0"
@@ -37,6 +40,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:${springDocVersion}")
+    implementation("org.springframework.kafka:spring-kafka")
 
     implementation("org.projectlombok:lombok:${lombokVersion}")
     implementation("org.mapstruct:mapstruct:${mapstructVersion}")
@@ -46,13 +50,13 @@ dependencies {
 
 }
 
-
+//Download and unzip documentation to folder /build/docs
 tasks.register<Copy>("uploadApiDoc") {
     group = "apidoc"
     description = "Uploads the documentation artifact"
 
     configurations.create("docs")
-    project.dependencies.add("docs", "com.example:api-doc-service:$version@tar")
+    project.dependencies.add("docs", "org.example:api-doc-service:$version@tar")
 
     from({
         configurations.getByName("docs")
@@ -60,30 +64,34 @@ tasks.register<Copy>("uploadApiDoc") {
             .map { tarTree(it) }
     })
     into(layout.buildDirectory.dir("docs"))
-
-
-//        tasks.withType(GenerateTask::class.java) {
-//            dependsOn("uploadApiDoc")
-//        }
 }
 
-
+//generate controllers
 generateServerFromOpenapi(
     "api-backend",
     "${layout.buildDirectory.get()}/docs/api-doc-service-$apiVersion/services/backend-service/openapi.yaml",
     "org.example.backend.apifirst.controller"
 )
 
+//generate http client to pet service
 generateClientFromOpenapi(
     "pet-service",
     "${layout.buildDirectory.get()}/docs/api-doc-service-$apiVersion/services/pet-service/openapi.yaml",
     "org.example.backend.apifirst.client.pet"
 )
 
+//generate http client to user service
 generateClientFromOpenapi(
     "user-service",
     "${layout.buildDirectory.get()}/docs/api-doc-service-$apiVersion/services/user-service/openapi.yaml",
     "org.example.backend.apifirst.client.user"
+)
+
+//generate dto of asyncapi
+generateAsyncapiModel(
+    "asyncapi-service",
+    "${layout.buildDirectory.get()}/docs/api-doc-service-$apiVersion/services/backend-service/asyncapi.yaml",
+    "org.example.backend.apifirst.asyncapi"
 )
 
 tasks.named("compileJava") {
@@ -93,6 +101,11 @@ tasks.named("compileJava") {
 tasks.withType(GenerateTask::class.java) {
     dependsOn("uploadApiDoc")
 }
+
+tasks.withType(NpxTask::class.java) {
+    dependsOn("uploadApiDoc")
+}
+
 
 fun generateServerFromOpenapi(name: String, swaggerPath: String, pkg: String) {
 
@@ -149,7 +162,6 @@ fun generateServerFromOpenapi(name: String, swaggerPath: String, pkg: String) {
             )
         )
     }
-
 }
 
 fun generateClientFromOpenapi(name: String, swaggerPath: String, pkg: String) {
@@ -204,7 +216,56 @@ fun generateClientFromOpenapi(name: String, swaggerPath: String, pkg: String) {
 }
 
 
+node {
+    download.set(true)
+    version.set("22.9.0")
+    allowInsecureProtocol.set(true)
+    nodeProjectDir.set(file("${project.rootDir}/.gradle/nodejs-modules"))
+    workDir.set(file("${project.rootDir}/.gradle/nodejs"))
+    npmWorkDir.set(file("${project.rootDir}/.gradle/npm"))
+}
 
+tasks.register("asyncapiInstall", NpxTask::class.java) {
+    dependsOn("uploadApiDoc")
+    group = "apidoc"
+    description = "Install asyncapi dependencies"
+    command = "npm"
+    args = listOf("install", "@asyncapi/cli", "@asyncapi/modelina", "@asyncapi/java-spring-template")
+}
 
+fun generateAsyncapiModel(name: String, path: String, pkg: String) {
+    tasks.findByName("compileJava")?.apply {
+        dependsOn("generateAsyncApiModel-$name")
+    }
+    tasks.findByName("sourcesJar")?.apply {
+        dependsOn("generateAsyncApiModel-$name")
+    }
 
+    project.extensions.getByType(JavaPluginExtension::class).apply {
+        sourceSets.getByName("main") {
+            java.srcDirs(
+                layout.buildDirectory.file("generated/sources/asyncapi/src/main/java").get().asFile.absolutePath
+            )
+        }
+    }
 
+    tasks.register("generateAsyncApiModel-$name", NpxTask::class.java) {
+        group = "build"
+        description = "Generates asyncapi model files $name"
+        dependsOn("asyncapiInstall")
+
+        command = "@asyncapi/cli"
+        args = listOf(
+            "generate",
+            "models",
+            "java",
+            path,
+            "-o",
+            layout.buildDirectory.file("generated/sources/asyncapi/src/main/java/${pkg.replace("\\.", "/")}").get().asFile.absolutePath,
+            "--packageName=${pkg}",
+            "--javaJackson",
+            "--javaArrayType=List",
+            "--javaIncludeComments",
+        )
+    }
+}

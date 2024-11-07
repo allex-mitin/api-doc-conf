@@ -1,0 +1,24 @@
+publish:
+  operationId: savePet
+  summary: >-
+    Incoming pet save event
+  message:
+    messageId: savePetMessage
+    name: savePet
+    title: Pet save notification
+    contentType: 'application/json'
+    traits:
+      - headers:
+          type: object
+          properties:
+            my-app-header:
+              type: integer
+              minimum: 0
+              maximum: 100
+    payload:
+      $ref: '../components/schemas/message.yml#/SavePetMessage'
+    headers:
+      type: object
+      properties:
+        pet-id:
+          type: string

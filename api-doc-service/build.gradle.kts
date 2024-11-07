@@ -46,7 +46,7 @@ publishing {
     publications {
         create<MavenPublication>("publish-tar") {
             artifact(tasks.distTar.get())
-            groupId = "com.example"
+            groupId = "org.example"
             artifactId = "api-doc-service"
             version = version
         }
@@ -54,6 +54,14 @@ publishing {
     repositories {
         mavenLocal()
     }
+}
+
+// Settings for nodeJs plugin
+node {
+    download.set(true)
+    version.set("18.17.1")
+    allowInsecureProtocol.set(true)
+    nodeProjectDir.set(file("${project.projectDir}"))
 }
 
 //Step 1: copy sources to build dir. In this step we can do something with files after copy
@@ -139,6 +147,9 @@ fileTree(buildSourcesDir).matching {
     }
 }
 
+
+
+
 //create tasks for build asyncapi files and copy to dist folder
 fileTree(buildSourcesDir).matching {
     include("**/asyncapi.yaml", "**/asyncapi.yml", "**/asyncapi.json")
@@ -163,7 +174,8 @@ fileTree(buildSourcesDir).matching {
                 "bundle",
                 el.toURI().path,
                 "-o",
-                "${buildFolder}/asyncapi.yaml"
+                "${buildFolder}/asyncapi.yaml",
+                "-x"
             )
         )
 
