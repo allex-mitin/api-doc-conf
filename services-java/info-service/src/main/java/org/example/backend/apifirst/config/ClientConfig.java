@@ -1,7 +1,7 @@
 package org.example.backend.apifirst.config;
 
-import org.example.backend.apifirst.client.pet.client.PetApi;
-import org.example.backend.apifirst.client.user.client.UserApi;
+import org.example.info.client.pet.client.PetApi;
+import org.example.info.client.user.client.UserApi;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
@@ -19,16 +19,16 @@ public class ClientConfig {
     }
 
     @Bean
-    public PetApi petApi(org.example.backend.apifirst.client.pet.ApiClient apiClient) {
+    public PetApi petApi(org.example.info.client.pet.ApiClient apiClient) {
         return new PetApi(apiClient);
     }
 
     @Bean
-    public org.example.backend.apifirst.client.pet.ApiClient petApiClient(
+    public org.example.info.client.pet.ApiClient petApiClient(
             RestTemplateBuilder restTemplateBuilder,
             @Value("${rest-client.pet-url}") String url
     ) {
-        return new org.example.backend.apifirst.client.pet.ApiClient(
+        return new org.example.info.client.pet.ApiClient(
                 restTemplateBuilder
                         .uriTemplateHandler(new DefaultUriBuilderFactory(url))
                         .build()
@@ -36,16 +36,16 @@ public class ClientConfig {
     }
 
     @Bean
-    public UserApi userApi(org.example.backend.apifirst.client.user.ApiClient apiClient) {
+    public UserApi userApi(org.example.info.client.user.ApiClient apiClient) {
         return new UserApi(apiClient);
     }
 
     @Bean
-    public org.example.backend.apifirst.client.pet.ApiClient userApiClient(
+    public org.example.info.client.user.ApiClient userApiClient(
             RestTemplateBuilder restTemplateBuilder,
             @Value("${rest-client.user-url}") String url
     ) {
-        return new org.example.backend.apifirst.client.pet.ApiClient(
+        return new org.example.info.client.user.ApiClient(
                 restTemplateBuilder
                         .uriTemplateHandler(new DefaultUriBuilderFactory(url))
                         .build()

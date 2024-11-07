@@ -1,10 +1,11 @@
 package org.example.backend.apifirst.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.example.backend.apifirst.client.pet.client.PetApi;
-import org.example.backend.apifirst.client.user.client.UserApi;
-import org.example.backend.apifirst.controller.dto.InfoResponse;
 import org.example.backend.apifirst.mapper.DtoMapper;
+import org.example.info.client.pet.client.PetApi;
+import org.example.info.client.user.client.UserApi;
+import org.example.info.controller.InfoApi;
+import org.example.info.controller.dto.InfoResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.RestController;

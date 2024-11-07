@@ -5,10 +5,10 @@ function settings() {
                 "path": "backend-apifirst",
                 "name": "Backend API First Service",
                 "openapi": {
-                    "url": "/api-doc/services/backend-service/openapi.yml"
+                    "url": "/api-doc/services/info-service/openapi.yml"
                 },
                 "asyncapi": {
-                    "url": "/api-doc/services/backend-service/asyncapi.yml"
+                    "url": "/api-doc/services/info-service/asyncapi.yml"
                 }
             },
             {

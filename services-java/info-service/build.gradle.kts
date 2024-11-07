@@ -1,29 +1,17 @@
 import com.github.gradle.node.npm.task.NpxTask
 import org.openapitools.generator.gradle.plugin.tasks.GenerateTask
 
-//buildscript {
-//    dependencies {
-//        classpath("com.github.node-gradle:gradle-node-plugin:7.0.2")
-//        classpath("org.openapitools:openapi-generator-gradle-plugin:7.6.0")
-//    }
-//}
-//
-//apply(plugin = "com.github.node-gradle.node")
-//apply(plugin = "org.openapi.generator")
-
 
 plugins {
     id("java")
     id("org.springframework.boot") version "3.3.2"
     id("org.openapi.generator") version "7.6.0"
     id("com.github.node-gradle.node") version "7.0.2"
-//    id("com.sngular.scs-multiapi-gradle-plugin") version "6.0.4"
-//    id("org.jsonschema2pojo") version "1.2.2"
 }
 
 version = "1.0.0"
 group = "org.example"
-description = "backend-apifirst"
+description = "info-service"
 
 
 val apiVersion = project.property("api.version") as String
@@ -69,29 +57,29 @@ tasks.register<Copy>("uploadApiDoc") {
 //generate controllers
 generateServerFromOpenapi(
     "api-backend",
-    "${layout.buildDirectory.get()}/docs/api-doc-service-$apiVersion/services/backend-service/openapi.yaml",
-    "org.example.backend.apifirst.controller"
+    "${layout.buildDirectory.get()}/docs/api-doc-service-$apiVersion/services/info-service/openapi.yaml",
+    "org.example.info.controller"
 )
 
 //generate http client to pet service
 generateClientFromOpenapi(
     "pet-service",
     "${layout.buildDirectory.get()}/docs/api-doc-service-$apiVersion/services/pet-service/openapi.yaml",
-    "org.example.backend.apifirst.client.pet"
+    "org.example.info.client.pet"
 )
 
 //generate http client to user service
 generateClientFromOpenapi(
     "user-service",
     "${layout.buildDirectory.get()}/docs/api-doc-service-$apiVersion/services/user-service/openapi.yaml",
-    "org.example.backend.apifirst.client.user"
+    "org.example.info.client.user"
 )
 
 //generate dto of asyncapi
 generateAsyncapiModel(
     "asyncapi-service",
-    "${layout.buildDirectory.get()}/docs/api-doc-service-$apiVersion/services/backend-service/asyncapi.yaml",
-    "org.example.backend.apifirst.asyncapi"
+    "${layout.buildDirectory.get()}/docs/api-doc-service-$apiVersion/services/info-service/asyncapi.yaml",
+    "org.example.info.asyncapi"
 )
 
 tasks.named("compileJava") {
