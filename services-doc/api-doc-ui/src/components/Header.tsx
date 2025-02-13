@@ -21,7 +21,7 @@ export const Header: FC = () => {
             </NavLink>
 
             <T font='Header/H6'>
-                ApiDoc - System api documentation
+                Rome API - View API documentation service
             </T>
             <Menu/>
         </HeaderWrapper>
